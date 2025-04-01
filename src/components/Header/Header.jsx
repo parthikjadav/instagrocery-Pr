@@ -1,41 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { FaPlus, FaSearch, FaShoppingCart, FaTimes, FaMinus, FaBars } from "react-icons/fa";
-import Logo from "../../assets/images/Logo/Logo.svg";
-import Time from "../../assets/images/AddtoCart/time.png";
+import { useState } from "react";
+import {  FaSearch, FaTimes, FaBars } from "react-icons/fa";
+// import Logo from "../../assets/images/Logo/Logo.svg";
+// import Time from "../../assets/images/AddtoCart/time.png";
 import LoginModal from "../LoginModel/LoginModel";
 import { Button } from "@heroui/button";
 import AppDrawer from "../Drawer";
+import AnimatedHeadline from "./HeadLine";
 
-const placeholders = [
-    "sugar",
-    "milk",
-    "chips",
-    "crud",
-    "milik",
-    "rice",
-    "vegetable",
-    "fruits",
-    "bread",
-    "butter",
-    "oil",
-    "snacks",
-    "cold drinks",
-    "biscuits",
-    "pulses"
-];
+
 
 const Header = () => {
-    const [isCartOpen, setIsCartOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [placeholderIndex, setPlaceholderIndex] = useState(0);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
-        }, 2000);
-        return () => clearInterval(interval);
-    }, []);
+    const headlines = [
+        "sugar",
+        "milk",
+        "chips",
+        "crud",
+        "milik",
+        "rice",
+        "vegetable",
+        "fruits",
+        "bread",
+        "butter",
+        "oil",
+        "snacks",
+        "cold drinks",
+        "biscuits",
+        "pulses"
+    ];
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
+    //     }, 2000);
+    //     return () => clearInterval(interval);
+    // }, []);
 
     return (
         <>
@@ -59,13 +60,15 @@ const Header = () => {
                                 <p className="text-gray-500 text-sm">405, Varachha Main Rd</p>
                             </div>
 
-                            <div className="relative w-full lg:w-96 flex items-center bg-gray-100 px-4 py-3 border border-gray-300 rounded-full focus-within:ring-2 focus-within:ring-green-500 transition-all duration-300">
+                            <div className="relative overflow-hidden w-full max-h-[50px] lg:w-96 flex items-center bg-gray-100 px-4 py-3 border border-gray-300 rounded-full focus-within:ring-2 focus-within:ring-green-500 transition-all duration-300">
                                 <FaSearch className="text-gray-500" />
                                 <input
                                     type="search"
-                                    placeholder={placeholders[placeholderIndex]}
                                     className="w-full bg-transparent outline-none px-3 text-lg transition-all duration-500 ease-in-out placeholder-opacity-100 placeholder-animated"
                                 />
+                                <div className="absolute top-[30%] w-full text-left" >
+                                <AnimatedHeadline texts={headlines} duration={1} delay={2} />
+                                </div>
                             </div>
                         </div>
                     </nav>
@@ -75,7 +78,7 @@ const Header = () => {
                         <Button variant="light" className="text-black font-medium text-md" onClick={() => setIsLoginOpen(true)}>
                             Login
                         </Button>
-                        <AppDrawer/>
+                        <AppDrawer />
                     </div>
                 </div>
             </header>
